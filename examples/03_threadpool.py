@@ -11,3 +11,14 @@ for _ in range(4):
 gevent.wait()
 delay = time.time() - start
 print('Running "time.sleep(1)" 4 times with 3 threads. Should take about 2 seconds: %.3fs' % delay)
+
+
+'''
+$ python 03_threadpool.py
+Running "time.sleep(1)" 4 times with 3 threads. Should take about 2 seconds: 2.005s
+$
+$ python 03_threadpool.py
+Running "time.sleep(1)" 4 times with 3 threads. Should take about 2 seconds: 2.003s
+$ 
+
+'''

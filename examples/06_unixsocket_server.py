@@ -6,12 +6,12 @@ from gevent import socket
 def application(environ, start_response):
     assert environ
     start_response('200 OK', [])
-    return []
+    return []  # 返回的数据类型是什么
 
 
 if __name__ == '__main__':
     listener = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    sockname = './' + os.path.basename(__file__) + '.sock'
+    sockname = './' + os.path.basename(__file__) + '.sock'  # 06_unixsocket_server.py.sock=
     if os.path.exists(sockname):
         os.remove(sockname)
     listener.bind(sockname)

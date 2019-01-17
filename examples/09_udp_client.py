@@ -11,7 +11,7 @@ from __future__ import print_function
 import sys
 from gevent import socket
 
-address = ('localhost', 9001)
+address = ('localhost', 9000)
 message = ' '.join(sys.argv[1:])
 sock = socket.socket(type=socket.SOCK_DGRAM)
 sock.connect(address)
@@ -20,3 +20,15 @@ sock.send(message.encode())
 data, address = sock.recvfrom(8192)
 print('%s:%s: got %r' % (address + (data, )))
 sock.close()
+
+'''
+$ python 09_udp_client.py
+Sending 0 bytes to localhost:9000
+127.0.0.1:9000: got b'Received 0 bytes'
+$
+$ python 09_udp_client.py message
+Sending 7 bytes to localhost:9000
+127.0.0.1:9000: got b'Received 7 bytes'
+$
+
+'''

@@ -21,6 +21,7 @@ from gevent.socket import create_connection, gethostbyname
 
 class PortForwarder(StreamServer):
 
+    # # PortForwarder(':8080', ('216.239.32.21', 80))
     def __init__(self, listener, dest, **kwargs):
         StreamServer.__init__(self, listener, **kwargs)
         self.dest = dest
@@ -80,7 +81,7 @@ def forward(source, dest, server):
         server = None
 
 
-def parse_address(address):
+def parse_address(address):  # gevent.org:80
     try:
         hostname, port = address.rsplit(':', 1)
         port = int(port)
@@ -90,11 +91,12 @@ def parse_address(address):
 
 
 def main():
-    args = sys.argv[1:]
+    # # python portforwarder.py :8080 gevent.org:80
+    args = sys.argv[1:]  # [':8080', 'gevent.org:80']
     if len(args) != 2:
         sys.exit('Usage: %s source-address destination-address' % __file__)
     source = args[0]
-    dest = parse_address(args[1])
+    dest = parse_address(args[1])  # ('216.239.32.21', 80)
     server = PortForwarder(source, dest)
     log('Starting port forwarder %s:%s -> %s:%s', *(server.address[:2] + dest))
     gevent.signal(signal.SIGTERM, server.close)

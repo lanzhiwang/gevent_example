@@ -19,3 +19,11 @@ class EchoServer(DatagramServer):
 if __name__ == '__main__':
     print('Receiving datagrams on :9000')
     EchoServer(':9000').serve_forever()
+
+'''
+$ python 08_udp_server.py
+Receiving datagrams on :9000
+127.0.0.1: got b''
+127.0.0.1: got b'message'
+
+'''
